@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List</title>
-</head>
-<body>
+@extends('layout.layout')
+
+@section('title', 'List')
+
+@section('contents')
     <a href="{{route('boards.create')}}">작성하기</a>
+    <br>
+    <br>
     <table>
         <tr>
             <th>글번호</th>
@@ -32,5 +30,5 @@
             <td></td>
         @endforelse
         </table>
-</body>
-</html>
+@endsection
+

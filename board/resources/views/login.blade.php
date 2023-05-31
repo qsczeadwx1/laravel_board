@@ -6,10 +6,7 @@
 <h1>Login</h1>
 @include('layout.errorsvalidate')
 
-    {{-- <div>{{isset($success) ? $success : ""}}</div> --}}
-    @isset($success)
-        <div>asdfasdfsadfas</div>
-    @endisset
+    <div>{!!session()->has('success') ? session('success') : ""!!}</div>
     
     <form action="{{route('users.login.post')}}" method="post">
         @csrf
