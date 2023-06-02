@@ -19,4 +19,16 @@
         <button type="submit">로그인</button>
         <button type="button" onclick="location.href = '{{route('users.registration')}}'">회원가입</button>
     </form>
+    <?php
+    function m_page_view(){
+    return preg_match('/phone|samsung|lgtel|mobile|[^A]skt|nokia|blackberry|android|sony/i', $_SERVER['HTTP_USER_AGENT']);
+    }
+    echo m_page_view();
+    var_dump($_SERVER['HTTP_USER_AGENT']);
+    if(m_page_view()) {
+        echo 'a';
+    } else {
+        echo 'b';
+    }
+    ?>
 @endsection

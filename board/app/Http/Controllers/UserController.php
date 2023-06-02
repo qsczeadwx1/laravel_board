@@ -11,20 +11,37 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 use App\Models\User;
 
 class UserController extends Controller
 {
     function login() {
+
+        $arr['key'] = 'test';
+        $arr['kim'] = 'park';
+
+        Log::emergency("emergency", $arr);
+        Log::alert("alert", $arr);
+        Log::critical("critical", $arr);
+        Log::error("error", $arr);
+        Log::warning("warning", $arr);
+        Log::notice('notice', $arr);
+        Log::info('info', $arr);
+        Log::debug('debug', $arr);
+
         return view('login');
     }
 
     function loginpost(Request $req) {
+
         // 유효성 체크
         $req->validate([
             'email' => 'required|email|max:100'
             ,'password' => 'required|regex:/^(?=.*[a-zA-z])(?=.*[!@#$%^*-])(?=.*[0-9]).{8,20}$/'
         ]);
+
+        Log::debug('유효성 OK');
 
         // 유저정보 습득
         $user = User::where('email', $req->email)->first();
@@ -88,9 +105,9 @@ class UserController extends Controller
         ]);
         $same = Hash::check($validate['password'], Auth::user()->password);
         if ($same) {
-            return redirect() -> back() -> with('message', '이전 비밀번호는 사용할 수 없습니다.');
+            return redirect()->back()->with('message', '이전 비밀번호는 사용할 수 없습니다.');
         }
-        $user = User::find(Auth::user()-> id);
+        $user = User::find(Auth::user()->id);
         $user->password = Hash::make($validate['password']);
         $user->save();
 
